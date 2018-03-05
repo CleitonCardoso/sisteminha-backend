@@ -1,6 +1,8 @@
 package com.sisteminha.entities;
 
-import javax.persistence.Column;
+import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,23 +23,22 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Evaluation {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column(nullable = false, unique = true)
-	private String username;
-	@Column(nullable = false)
-	private String password;
+
+	@OneToMany(mappedBy= "evaluation")
+	private List<Question> questions;
+
 	@Enumerated(EnumType.STRING)
-	private Role role;
-	private boolean active;
-	@ManyToOne
-	@JoinColumn(name = "tenant_id")
-	private Tenant tenant;
+	private EvaluationStatus status;
+
+	private Date startingDate;
+	private Date endingDate;
+	
 	@ManyToOne
 	@JoinColumn(name = "incubator_id")
 	private Incubator incubator;
-
 }

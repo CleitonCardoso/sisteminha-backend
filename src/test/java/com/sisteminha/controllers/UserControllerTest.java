@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.sisteminha.entities.User;
 import com.sisteminha.entities.User.UserBuilder;
 import com.sisteminha.repositories.UserRepository;
+import com.sisteminha.resources.UserResource;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -22,7 +23,7 @@ import com.sisteminha.repositories.UserRepository;
 public class UserControllerTest {
 
 	@Autowired
-	private UserController userController;
+	private UserResource userController;
 
 	@Autowired
 	private UserRepository userRepository;
