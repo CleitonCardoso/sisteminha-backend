@@ -3,15 +3,19 @@ package com.sisteminha.entities;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,7 +33,9 @@ public class Evaluation {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@OneToMany(mappedBy= "evaluation")
+	private String title;
+
+	@OneToMany(mappedBy = "evaluation", cascade = CascadeType.REMOVE)
 	private List<Question> questions;
 
 	@Enumerated(EnumType.STRING)
@@ -37,8 +43,9 @@ public class Evaluation {
 
 	private Date startingDate;
 	private Date endingDate;
-	
-	@ManyToOne
+
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "incubator_id")
 	private Incubator incubator;
 }

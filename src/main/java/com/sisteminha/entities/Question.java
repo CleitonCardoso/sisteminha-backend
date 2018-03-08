@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,6 +27,7 @@ public class Question {
 	private String title;
 	private String content;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "evaluation_id")
 	private Evaluation evaluation;
