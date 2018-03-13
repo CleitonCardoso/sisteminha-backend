@@ -13,4 +13,6 @@ public interface EvaluationRepository extends CrudRepository<Evaluation, Long> {
 
 	void deleteByIncubatorAndId(Incubator incubator, Long id);
 
+	Evaluation findByIncubatorAndId(Incubator incubator, Long id);
+
 }

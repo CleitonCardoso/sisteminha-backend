@@ -35,7 +35,8 @@ public class Evaluation {
 
 	private String title;
 
-	@OneToMany(mappedBy = "evaluation", cascade = CascadeType.REMOVE)
+	@JsonIgnore
+	@OneToMany(mappedBy = "evaluation", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
 	private List<Question> questions;
 
 	@Enumerated(EnumType.STRING)

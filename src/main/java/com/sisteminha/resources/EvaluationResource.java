@@ -26,6 +26,11 @@ public class EvaluationResource extends LoggedResource {
 		return service.findAll(getLoggedIncubator());
 	}
 
+	@RequestMapping(path = "{id}", method = RequestMethod.GET)
+	public Evaluation find(@PathVariable("id") Long id) {
+		return service.find(getLoggedIncubator(), id);
+	}
+
 	@Transactional
 	@RequestMapping(path = "{id}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable("id") Long id) {

@@ -23,4 +23,8 @@ public class EvaluationService {
 		repository.deleteByIncubatorAndId(incubator, id);
 	}
 
+	public Evaluation find(Incubator incubator, Long id) {
+		return repository.findByIncubatorAndId(incubator, id);
+	}
+
 }
