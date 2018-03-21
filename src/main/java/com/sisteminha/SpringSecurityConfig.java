@@ -36,6 +36,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
 		corsConfiguration.addAllowedMethod(HttpMethod.OPTIONS);
 		corsConfiguration.addAllowedMethod(HttpMethod.DELETE);
+		corsConfiguration.addAllowedOrigin("*");
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", corsConfiguration);
 		http.cors().configurationSource(source);
@@ -43,7 +44,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.httpBasic().authenticationEntryPoint(authEntryPoint);
 		http.authorizeRequests().anyRequest().authenticated();
 		http.authorizeRequests().antMatchers("/admin", "/h2/**").hasRole("ADMIN").anyRequest().authenticated();
-		http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
+		// http.authorizeRequests().antMatchers(HttpMethod.OPTIONS,
+		// "/**").permitAll();
 		http.formLogin().loginProcessingUrl("/login");
 		http.authenticationProvider(customAuthProvider);
 		http.formLogin().successHandler(new AuthenticationSuccessHandler() {
