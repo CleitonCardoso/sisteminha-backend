@@ -1,6 +1,8 @@
 language: java
 install: 
   - gradle --daemon
+script:
+  - gradle check
 deploy:
   provider: heroku
   api_key:
