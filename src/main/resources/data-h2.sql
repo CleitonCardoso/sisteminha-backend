@@ -3,7 +3,7 @@ INSERT INTO incubator (id,name) values
 (1, 'Inovaparq');
 
 INSERT INTO tenant (id, company_Name, company_Owner, maturity_Level, score, incubator_id) values
-(1, 'sisteminha avaliação de incubadoras', 'Cleiton Cardoso' ,'PROJECT', 5, 1);
+(1, 'sisteminha avaliaÃ§Ã£o de incubadoras', 'Cleiton Cardoso' ,'PROJECT', 5, 1);
 
 INSERT INTO user (id, username, password, role, active, tenant_id, incubator_id) values
 (1, 'incubadora', 'pass', 'INCUBATOR',  true, 1, 1);
@@ -19,4 +19,4 @@ INSERT INTO evaluation (id, title, status, starting_date, ending_date, incubator
 (2, 'Ciclo avaliativo fase 1','CLOSED', '2017-12-01', '2018-01-01', 1);
 
 INSERT INTO question (id, title, content, evaluation_id, axis, incubator_id) values
-(1, 'Questão 1', 'O Quanto você estuda?', 2, 'MARKET', 1);
+(1, 'Questï¿½o 1', 'O Quanto vocï¿½ estuda?', 2, 'MARKET', 1);
