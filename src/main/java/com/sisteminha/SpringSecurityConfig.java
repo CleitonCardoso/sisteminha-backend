@@ -33,6 +33,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
+		corsConfiguration.addAllowedMethod(HttpMethod.OPTIONS);
 		corsConfiguration.addAllowedMethod( HttpMethod.DELETE );
 		http.cors().configurationSource( request -> corsConfiguration );
 		http.headers().frameOptions().disable();
@@ -60,6 +61,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 			}
 		} );
 	}
+	
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
