@@ -19,13 +19,12 @@ public class EvaluationResource extends LoggedResource {
 
 	@Autowired
 	private EvaluationService service;
-
-	// TODO esse método tem que mudar de acordo com a role do user logado
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Evaluation> findAll() {
 		return service.findAll(getLoggedIncubator());
 	}
-
+	
 	@RequestMapping(path = "{id}", method = RequestMethod.GET)
 	public Evaluation find(@PathVariable("id") Long id) {
 		return service.find(getLoggedIncubator(), id);
