@@ -17,12 +17,16 @@ public class QuestionService {
 	private QuestionRepository repository;
 
 	public List<Question> findAll(Incubator incubator, Long evaluationId) {
-		return repository.findAllByIncubatorAndEvaluationId(incubator, evaluationId);
+		return repository.findAllByIncubatorAndEvaluationId( incubator, evaluationId );
 	}
 
 	public Question save(Incubator loggedIncubator, Long id, Question question) {
-		question.setIncubator(loggedIncubator);
-		question.setEvaluation(Evaluation.builder().id(id).build());
-		return repository.save(question);
+		question.setIncubator( loggedIncubator );
+		question.setEvaluation( Evaluation.builder().id( id ).build() );
+		return repository.save( question );
+	}
+
+	public void delete(Incubator loggedIncubator, Long id) {
+		repository.delete( id );
 	}
 }

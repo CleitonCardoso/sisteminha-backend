@@ -20,12 +20,17 @@ public class QuestionResource extends LoggedResource {
 
 	@RequestMapping(path = "evaluation/{id}/questions", method = RequestMethod.GET)
 	public List<Question> findAll(@PathVariable("id") Long id) {
-		return questionService.findAll(getLoggedIncubator(), id);
+		return questionService.findAll( getLoggedIncubator(), id );
 	}
 
 	@RequestMapping(path = "evaluation/{id}/question", method = RequestMethod.POST)
 	public Question save(@PathVariable("id") Long id, @RequestBody Question question) {
-		return questionService.save(getLoggedIncubator(), id, question);
+		return questionService.save( getLoggedIncubator(), id, question );
+	}
+
+	@RequestMapping(path = "evaluation/{id}/question", method = RequestMethod.DELETE)
+	public void delete(@PathVariable("id") Long id) {
+		questionService.delete( getLoggedIncubator(), id );
 	}
 
 }
