@@ -47,6 +47,6 @@ public class Evaluation {
 
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "incubator_id")
+	@JoinColumn(name = "incubator_id", nullable = false)
 	private Incubator incubator;
 }

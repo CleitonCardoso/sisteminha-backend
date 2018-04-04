@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,12 +20,18 @@ public class EvaluationResource extends LoggedResource {
 
 	@Autowired
 	private EvaluationService service;
-	
+
+	@RequestMapping(method= RequestMethod.POST)
+	public void save(@RequestBody Evaluation evaluation){
+		evaluation.setIncubator(getLoggedIncubator());
+		service.save(evaluation);
+	}
+
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Evaluation> findAll() {
 		return service.findAll(getLoggedIncubator());
 	}
-	
+
 	@RequestMapping(path = "{id}", method = RequestMethod.GET)
 	public Evaluation find(@PathVariable("id") Long id) {
 		return service.find(getLoggedIncubator(), id);

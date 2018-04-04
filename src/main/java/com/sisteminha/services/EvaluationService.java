@@ -27,4 +27,8 @@ public class EvaluationService {
 		return repository.findByIncubatorAndId(incubator, id);
 	}
 
+	public void save(Evaluation evaluation) {
+		repository.save(evaluation);
+	}
+
 }
