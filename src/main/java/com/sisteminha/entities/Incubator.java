@@ -26,6 +26,12 @@ public class Incubator {
 
 	private String name;
 
+	private String directorName;
+
+	private String phone;
+
+	private String mail;
+
 	@OneToMany(mappedBy = "incubator")
 	private List<User> users;
 

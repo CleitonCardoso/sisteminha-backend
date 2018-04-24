@@ -15,6 +15,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Data
 @Builder
@@ -32,9 +34,11 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	private boolean active;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "tenant_id")
 	private Tenant tenant;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "incubator_id")
 	private Incubator incubator;
