@@ -38,7 +38,7 @@ public class User {
 	@ManyToOne
 	@JoinColumn(name = "tenant_id")
 	private Tenant tenant;
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "incubator_id")
 	private Incubator incubator;

@@ -13,6 +13,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Data
 @Builder
@@ -33,12 +35,15 @@ public class Incubator {
 	private String mail;
 
 	@OneToMany(mappedBy = "incubator")
+	@JsonIgnore
 	private List<User> users;
 
 	@OneToMany(mappedBy = "incubator")
+	@JsonIgnore
 	private List<Evaluation> evaluations;
 
 	@OneToMany(mappedBy = "incubator")
+	@JsonIgnore
 	private List<Tenant> tenants;
 
 }

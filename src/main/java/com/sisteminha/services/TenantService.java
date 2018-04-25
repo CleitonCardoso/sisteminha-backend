@@ -18,4 +18,9 @@ public class TenantService {
 	public List<Tenant> findAll(Incubator incubator) {
 		return repository.findAllByIncubator(incubator);
 	}
+
+	public void save(Incubator loggedIncubator, Tenant tenant) {
+		tenant.setIncubator( loggedIncubator );
+		repository.save( tenant );
+	}
 }

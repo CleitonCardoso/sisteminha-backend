@@ -3,6 +3,7 @@ package com.sisteminha.resources;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,10 +18,15 @@ public class TenantResource extends LoggedResource {
 	@Autowired
 	private TenantService service;
 
-	// TODO esse método tem que mudar de acordo com a role do user logado
+	// TODO esse mï¿½todo tem que mudar de acordo com a role do user logado
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Tenant> findAll() {
 		return service.findAll(getLoggedIncubator());
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public void save(@RequestBody Tenant tenant){
+		service.save(getLoggedIncubator(), tenant);
 	}
 
 	// @Transactional
