@@ -21,22 +21,22 @@ public class UserResource extends LoggedResource {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public User save(@RequestBody User user) {
-		return userService.save(user);
+		return userService.save( getLoggedIncubator(), user );
 	}
 
 	@RequestMapping(method = RequestMethod.PUT)
-	public void update(@RequestBody User user) {
-		userService.save(user);
+	public User update(@RequestBody User user) {
+		return userService.save( getLoggedIncubator(), user );
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/{id}")
 	public User find(@PathVariable("id") Long id) {
-		return userService.find(id);
+		return userService.find( id );
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
 	public void delete(@PathVariable("id") Long id, Principal principal) throws Exception {
-		userService.delete(id, principal.getName());
+		userService.delete( id, principal.getName() );
 	}
 
 	@RequestMapping(method = RequestMethod.GET)

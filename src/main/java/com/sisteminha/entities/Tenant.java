@@ -14,12 +14,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Data
@@ -44,5 +44,8 @@ public class Tenant {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "incubator_id")
 	private Incubator incubator;
+	@JsonIgnore
+	@OneToMany(mappedBy = "tenant", fetch = FetchType.LAZY)
+	private List<EvaluationResponse> evaluationResponses;
 
 }

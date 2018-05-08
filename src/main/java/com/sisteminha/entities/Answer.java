@@ -13,6 +13,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Data
 @Builder
@@ -29,7 +31,12 @@ public class Answer {
 	@OneToOne
 	private Question question;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "tenant_id")
 	private Tenant tenant;
+
+	@ManyToOne
+	@JoinColumn(name = "evaluation_response_id")
+	private EvaluationResponse evaluationResponse;
 }

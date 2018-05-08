@@ -3,6 +3,7 @@ package com.sisteminha.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sisteminha.entities.Incubator;
 import com.sisteminha.entities.User;
 import com.sisteminha.repositories.UserRepository;
 
@@ -13,23 +14,24 @@ public class UserService {
 	private UserRepository userRepository;
 
 	public User findByUserNameAndPassword(String username, String password) {
-		return userRepository.findByUsernameAndPasswordAndActiveIsTrue(username, password);
+		return userRepository.findByUsernameAndPasswordAndActiveIsTrue( username, password );
 	}
 
-	public User save(User user) {
-		return userRepository.save(user);
+	public User save(Incubator incubator, User user) {
+		user.setIncubator( incubator );
+		return userRepository.save( user );
 	}
 
 	public User find(Long id) {
-		return userRepository.findOne(id);
+		return userRepository.findOne( id );
 	}
 
 	public void delete(Long id, String loggedUsername) throws Exception {
-		User user = find(id);
-		if (!loggedUsername.equals(user.getUsername()))
-			userRepository.delete(id);
+		User user = find( id );
+		if (!loggedUsername.equals( user.getUsername() ))
+			userRepository.delete( id );
 		else
-			throw new Exception("Não é possível excluir um usuário logado");
+			throw new Exception( "Não é possível excluir um usuário logado" );
 	}
 
 	public Iterable<User> list() {
@@ -37,7 +39,7 @@ public class UserService {
 	}
 
 	public User findByUserName(String username) {
-		return userRepository.findByUsername(username);
+		return userRepository.findByUsername( username );
 	}
 
 }

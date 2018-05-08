@@ -42,4 +42,5 @@ public class EvaluationResource extends LoggedResource {
 	public void delete(@PathVariable("id") Long id) {
 		service.delete(getLoggedIncubator(), id);
 	}
+	
 }

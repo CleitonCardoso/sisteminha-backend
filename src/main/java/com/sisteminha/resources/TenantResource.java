@@ -3,11 +3,13 @@ package com.sisteminha.resources;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sisteminha.entities.EvaluationResponse;
 import com.sisteminha.entities.Tenant;
 import com.sisteminha.services.TenantService;
 
@@ -18,20 +20,24 @@ public class TenantResource extends LoggedResource {
 	@Autowired
 	private TenantService service;
 
-	// TODO esse m�todo tem que mudar de acordo com a role do user logado
-	@RequestMapping(method = RequestMethod.GET)
-	public List<Tenant> findAll() {
-		return service.findAll(getLoggedIncubator());
-	}
-	
-	@RequestMapping(method = RequestMethod.POST)
-	public void save(@RequestBody Tenant tenant){
-		service.save(getLoggedIncubator(), tenant);
+	@RequestMapping(path = "{id}", method = RequestMethod.GET)
+	public Tenant get(@PathVariable("id") Long id) {
+		return service.find( id );
 	}
 
-	// @Transactional
-	// @RequestMapping(path = "{id}", method = RequestMethod.DELETE)
-	// public void delete(@PathVariable("id") Long id) {
-	// service.delete(getLoggedIncubator(), id);
-	// }
+	@RequestMapping(method = RequestMethod.GET)
+	public List<Tenant> findAll() {
+		return service.findAll( getLoggedIncubator() );
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	public Tenant save(@RequestBody Tenant tenant) {
+		return service.save( getLoggedIncubator(), tenant );
+	}
+
+	@RequestMapping(path = "{id}/evaluations", method = RequestMethod.GET)
+	public List<EvaluationResponse> listEvaluationResponses(@PathVariable("id") Long tenantId) {
+		return service.listEvaluationResponses( getLoggedIncubator() , tenantId);
+	}
+
 }
