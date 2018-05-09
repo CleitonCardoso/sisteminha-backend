@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sisteminha.entities.Evaluation;
 import com.sisteminha.entities.EvaluationResponse;
 import com.sisteminha.entities.Incubator;
 import com.sisteminha.entities.Tenant;
@@ -35,5 +36,14 @@ public class TenantService {
 
 	public List<EvaluationResponse> listEvaluationResponses(Incubator incubator, Long tenantId) {
 		return evaluationResponseRepository.findAllByIncubatorAndTenantId( incubator, tenantId );
+	}
+
+	public void includeTenantInEvaluation(Incubator incubator, Long tenantId, Long evaluationId) {
+		EvaluationResponse evaluationResponse = EvaluationResponse.builder()
+				.tenant( Tenant.builder().id( tenantId ).build() )
+				.evaluation( Evaluation.builder().id( evaluationId ).build() )
+				.incubator( incubator )
+				.build();
+		evaluationResponseRepository.save( evaluationResponse );
 	}
 }

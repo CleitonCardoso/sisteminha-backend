@@ -39,6 +39,7 @@ public class EvaluationResponse {
 	@JoinColumn(name = "tenant_id")
 	private Tenant tenant;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "incubator_id")
 	private Incubator incubator;

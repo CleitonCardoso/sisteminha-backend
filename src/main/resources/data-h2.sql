@@ -3,7 +3,7 @@ INSERT INTO incubator (id,name, director_name, phone) values
 (1, 'Inovaparq', 'Romão', '3422-2588');
 
 INSERT INTO tenant (id, company_Name, company_Owner, maturity_Level, score, incubator_id) values
-(1, 'sisteminha avaliação de incubadoras', 'Cleiton Cardoso' ,'PROJECT', 5, 1);
+(1, 'Sisteminha Avaliação de Incubadoras', 'Cleiton Cardoso' ,'PROJECT', 5, 1);
 
 INSERT INTO tenant (id, company_Name, company_Owner, maturity_Level, score, incubator_id) values
 (2, 'Vigilânte APP', 'Jorge gonçalvez' ,'GRADUATION', 1, 1);

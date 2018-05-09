@@ -38,7 +38,7 @@ public class Tenant {
 	private MaturityLevel maturityLevel;
 	private BigDecimal score;
 	@JsonIgnore
-	@OneToMany(mappedBy = "tenant", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "tenant", fetch = FetchType.EAGER)
 	private List<User> users;
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
