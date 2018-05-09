@@ -22,9 +22,9 @@ public class EvaluationResource extends LoggedResource {
 	private EvaluationService service;
 
 	@RequestMapping(method= RequestMethod.POST)
-	public void save(@RequestBody Evaluation evaluation){
+	public Evaluation save(@RequestBody Evaluation evaluation){
 		evaluation.setIncubator(getLoggedIncubator());
-		service.save(evaluation);
+		return service.save(evaluation);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)

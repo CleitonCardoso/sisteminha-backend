@@ -18,11 +18,11 @@ INSERT INTO user (id, username, password, role, active, tenant_id, incubator_id)
 (2, 'cleiton', 'pass', 'TENANT',  true, 1, 1);
 
 
-INSERT INTO evaluation (id, status, starting_date, ending_date, incubator_id) values
-(1, 'OPEN', '2018-01-01', '2018-04-30', 1);
+INSERT INTO evaluation (id, title, status, starting_date, ending_date, incubator_id) values
+(1, 'Ciclo avaliativo fase 1','CLOSED', '2018-01-01', '2018-04-30', 1);
 
 INSERT INTO evaluation (id, title, status, starting_date, ending_date, incubator_id) values
-(2, 'Ciclo avaliativo fase 1','CLOSED', '2017-12-01', '2018-01-01', 1);
+(2, 'Ciclo avaliativo fase 2','OPEN', '2018-01-01', '2018-08-01', 1);
 
 INSERT INTO question (id, title, content, evaluation_id, axis, incubator_id) values
 (1, 'Questão 1', 'O que você estuda atualmente?', 2, 'ENTREPRENEUR', 1);
