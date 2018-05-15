@@ -36,8 +36,13 @@ public class TenantResource extends LoggedResource {
 	}
 
 	@RequestMapping(path = "{id}/evaluations", method = RequestMethod.GET)
-	public List<EvaluationResponse> listEvaluationResponses(@PathVariable("id") Long tenantId) {
+	public List<EvaluationResponse> listEvaluationResponsesByTenant(@PathVariable("id") Long tenantId) {
 		return service.listEvaluationResponses( getLoggedIncubator(), tenantId );
+	}
+
+	@RequestMapping(path = "evaluations", method = RequestMethod.GET)
+	public List<EvaluationResponse> listEvaluationResponses() {
+		return service.listEvaluationResponses( getLoggedIncubator(), getLoggedTenant().getId() );
 	}
 
 	@RequestMapping(path = "{tenantId}/evaluation/{evaluationId}", method = RequestMethod.POST)

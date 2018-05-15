@@ -1,5 +1,6 @@
 package com.sisteminha;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import com.sisteminha.entities.User;
@@ -26,7 +28,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 		User user = userService.findByUserNameAndPassword( username, password );
 		if (user != null)
-			return new UsernamePasswordAuthenticationToken( username, password, Collections.emptyList() );
+			return new UsernamePasswordAuthenticationToken( username, password,
+					Arrays.asList( new SimpleGrantedAuthority( user.getRole().name() ) ) );
 		else
 			throw new BadCredentialsException( "External system authentication failed" );
 	}
