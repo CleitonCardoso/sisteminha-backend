@@ -11,10 +11,10 @@ INSERT INTO tenant (id, company_Name, company_Owner, maturity_Level, score, incu
 INSERT INTO tenant (id, company_Name, company_Owner, maturity_Level, score, incubator_id) values
 (3, 'Cosmética Digital', 'Emílio Giordano' ,'GROWING', 1, 1);
 
-INSERT INTO "user" (id, username, password, role, active, tenant_id, incubator_id) values
+INSERT INTO user_entity (id, username, password, role, active, tenant_id, incubator_id) values
 (1, 'incubadora', '1', 'INCUBATOR',  true, 1, 1);
 
-INSERT INTO "user" (id, username, password, role, active, tenant_id, incubator_id) values
+INSERT INTO user_entity (id, username, password, role, active, tenant_id, incubator_id) values
 (2, 'cleiton', '1', 'TENANT',  true, 1, 1);
 
 

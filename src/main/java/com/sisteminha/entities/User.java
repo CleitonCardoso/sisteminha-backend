@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
+@Entity(name="user_entity")
 @Data
 @Builder
 @NoArgsConstructor
@@ -38,7 +38,7 @@ public class User {
 	@ManyToOne
 	@JoinColumn(name = "tenant_id")
 	private Tenant tenant;
-//	@JsonIgnore
+	// @JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "incubator_id")
 	private Incubator incubator;
