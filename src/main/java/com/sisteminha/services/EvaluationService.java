@@ -16,19 +16,19 @@ public class EvaluationService {
 	private EvaluationRepository repository;
 
 	public List<Evaluation> findAll(Incubator incubator) {
-		return repository.findAllByIncubator(incubator);
+		return repository.findAllByIncubator( incubator );
 	}
 
 	public void delete(Incubator incubator, Long id) {
-		repository.deleteByIncubatorAndId(incubator, id);
+		repository.deleteByIncubatorAndId( incubator, id );
 	}
 
 	public Evaluation find(Incubator incubator, Long id) {
-		return repository.findByIncubatorAndId(incubator, id);
+		return repository.findByIncubatorAndId( incubator, id );
 	}
 
 	public Evaluation save(Evaluation evaluation) {
-		return repository.save(evaluation);
+		return repository.save( evaluation );
 	}
 
 }

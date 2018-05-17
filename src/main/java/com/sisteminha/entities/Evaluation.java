@@ -35,7 +35,6 @@ public class Evaluation {
 
 	private String title;
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "evaluation", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
 	private List<Question> questions;
 

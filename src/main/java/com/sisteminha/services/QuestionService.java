@@ -15,6 +15,8 @@ public class QuestionService {
 
 	@Autowired
 	private QuestionRepository repository;
+	
+	
 
 	public List<Question> findAll(Incubator incubator, Long evaluationId) {
 		return repository.findAllByIncubatorAndEvaluationId( incubator, evaluationId );

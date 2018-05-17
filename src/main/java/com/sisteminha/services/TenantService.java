@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import com.sisteminha.entities.Evaluation;
 import com.sisteminha.entities.EvaluationResponse;
 import com.sisteminha.entities.Incubator;
+import com.sisteminha.entities.Role;
 import com.sisteminha.entities.Tenant;
+import com.sisteminha.entities.User;
 import com.sisteminha.repositories.EvaluationResponseRepository;
 import com.sisteminha.repositories.TenantRepository;
 
@@ -19,6 +21,9 @@ public class TenantService {
 	private TenantRepository repository;
 
 	@Autowired
+	private UserService userService;
+
+	@Autowired
 	private EvaluationResponseRepository evaluationResponseRepository;
 
 	public List<Tenant> findAll(Incubator incubator) {
@@ -27,6 +32,18 @@ public class TenantService {
 
 	public Tenant save(Incubator loggedIncubator, Tenant tenant) {
 		tenant.setIncubator( loggedIncubator );
+		if (tenant.getId() == null) {
+			tenant = repository.save( tenant );
+			User tenantOwnerUser = User.builder()
+					.active( true )
+					.username( tenant.getEmail() )
+					.password( "1" )
+					.role( Role.TENANT )
+					.tenant( tenant )
+					.build();
+			userService.save( loggedIncubator, tenantOwnerUser );
+			return tenant;
+		}
 		return repository.save( tenant );
 	}
 

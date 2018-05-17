@@ -33,6 +33,7 @@ public class Tenant {
 	private Long id;
 	private String companyName;
 	private String companyOwner;
+	private String email;
 	private String phone;
 	@Enumerated(EnumType.STRING)
 	private MaturityLevel maturityLevel;
