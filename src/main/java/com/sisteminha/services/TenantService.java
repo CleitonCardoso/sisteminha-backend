@@ -3,6 +3,7 @@ package com.sisteminha.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.sisteminha.entities.Evaluation;
@@ -52,6 +53,11 @@ public class TenantService {
 	}
 
 	public List<EvaluationResponse> listEvaluationResponses(Incubator incubator, Long tenantId) {
+		List<EvaluationResponse> evaluationResponses = evaluationResponseRepository
+				.findAllByIncubatorAndTenantId( incubator, tenantId );
+		evaluationResponses.forEach( response -> response.getEvaluation().getQuestions()
+				.forEach( question -> question.getAlternatives()
+						.forEach( alternative -> alternative.setRightAnswer( false ) ) ) );
 		return evaluationResponseRepository.findAllByIncubatorAndTenantId( incubator, tenantId );
 	}
 
@@ -62,5 +68,18 @@ public class TenantService {
 				.incubator( incubator )
 				.build();
 		evaluationResponseRepository.save( evaluationResponse );
+	}
+
+	public EvaluationResponse getEvaluationResponse(Tenant loggedTenant, Long evaluationId) {
+		return evaluationResponseRepository
+				.findOne( Example.of( EvaluationResponse.builder()
+						.tenant( loggedTenant )
+						.id( evaluationId )
+						.build() ) );
+	}
+
+	public EvaluationResponse saveResponse(Tenant loggedTenant, EvaluationResponse evaluationResponse) {
+		evaluationResponse.setTenant( loggedTenant );
+		return evaluationResponseRepository.save( evaluationResponse );
 	}
 }

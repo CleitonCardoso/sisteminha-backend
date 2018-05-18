@@ -34,5 +34,10 @@ public class Alternative {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "question_id", nullable = false)
 	private Question question;
+	
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "incubator_id", nullable = false)
+	private Incubator incubator;
 
 }

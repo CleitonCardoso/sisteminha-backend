@@ -40,6 +40,16 @@ public class TenantResource extends LoggedResource {
 		return service.listEvaluationResponses( getLoggedIncubator(), tenantId );
 	}
 
+	@RequestMapping(path = "evaluation", method = RequestMethod.POST)
+	public EvaluationResponse getEvaluationResponse(@RequestBody EvaluationResponse evaluationResponse) {
+		return service.saveResponse(getLoggedTenant(),evaluationResponse);
+	}
+	
+	@RequestMapping(path = "evaluation/{id}", method = RequestMethod.GET)
+	public EvaluationResponse getEvaluationResponse(@PathVariable("id") Long evaluationId) {
+		return service.getEvaluationResponse( getLoggedTenant(), evaluationId );
+	}
+
 	@RequestMapping(path = "evaluations", method = RequestMethod.GET)
 	public List<EvaluationResponse> listEvaluationResponses() {
 		return service.listEvaluationResponses( getLoggedIncubator(), getLoggedTenant().getId() );
