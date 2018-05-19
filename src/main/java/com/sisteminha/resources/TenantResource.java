@@ -41,10 +41,10 @@ public class TenantResource extends LoggedResource {
 	}
 
 	@RequestMapping(path = "evaluation", method = RequestMethod.POST)
-	public EvaluationResponse getEvaluationResponse(@RequestBody EvaluationResponse evaluationResponse) {
-		return service.saveResponse(getLoggedTenant(),evaluationResponse);
+	public EvaluationResponse saveEvaluationResponse(@RequestBody EvaluationResponse evaluationResponse) {
+		return service.saveResponse( getLoggedTenant(), getLoggedIncubator(), evaluationResponse );
 	}
-	
+
 	@RequestMapping(path = "evaluation/{id}", method = RequestMethod.GET)
 	public EvaluationResponse getEvaluationResponse(@PathVariable("id") Long evaluationId) {
 		return service.getEvaluationResponse( getLoggedTenant(), evaluationId );

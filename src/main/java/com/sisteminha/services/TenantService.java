@@ -62,12 +62,19 @@ public class TenantService {
 	}
 
 	public void includeTenantInEvaluation(Incubator incubator, Long tenantId, Long evaluationId) {
-		EvaluationResponse evaluationResponse = EvaluationResponse.builder()
+		boolean alreadyExists = evaluationResponseRepository.exists( Example.of( EvaluationResponse.builder()
 				.tenant( Tenant.builder().id( tenantId ).build() )
-				.evaluation( Evaluation.builder().id( evaluationId ).build() )
 				.incubator( incubator )
-				.build();
-		evaluationResponseRepository.save( evaluationResponse );
+				.evaluation( Evaluation.builder().id( evaluationId ).build() )
+				.build() ) );
+		if (!alreadyExists) {
+			EvaluationResponse evaluationResponse = EvaluationResponse.builder()
+					.tenant( Tenant.builder().id( tenantId ).build() )
+					.evaluation( Evaluation.builder().id( evaluationId ).build() )
+					.incubator( incubator )
+					.build();
+			evaluationResponseRepository.save( evaluationResponse );
+		}
 	}
 
 	public EvaluationResponse getEvaluationResponse(Tenant loggedTenant, Long evaluationId) {
@@ -78,8 +85,10 @@ public class TenantService {
 						.build() ) );
 	}
 
-	public EvaluationResponse saveResponse(Tenant loggedTenant, EvaluationResponse evaluationResponse) {
+	public EvaluationResponse saveResponse(Tenant loggedTenant, Incubator loggedIncubator,
+			EvaluationResponse evaluationResponse) {
 		evaluationResponse.setTenant( loggedTenant );
+		evaluationResponse.setIncubator( loggedIncubator );
 		return evaluationResponseRepository.save( evaluationResponse );
 	}
 }

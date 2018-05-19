@@ -25,7 +25,10 @@ public class QuestionResource extends LoggedResource {
 
 	@RequestMapping(path = "evaluation/{id}/question", method = RequestMethod.POST)
 	public Question save(@PathVariable("id") Long id, @RequestBody Question question) {
-		question.getAlternatives().forEach( alternative -> alternative.setQuestion( question ) );
+		question.getAlternatives().forEach( alternative -> {
+			alternative.setQuestion( question );
+			alternative.setIncubator( getLoggedIncubator() );
+		} );
 		return questionService.save( getLoggedIncubator(), id, question );
 	}
 
