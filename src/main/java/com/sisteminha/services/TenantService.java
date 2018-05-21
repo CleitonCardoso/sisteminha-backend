@@ -53,11 +53,13 @@ public class TenantService {
 	}
 
 	public List<EvaluationResponse> listEvaluationResponses(Incubator incubator, Long tenantId) {
-		List<EvaluationResponse> evaluationResponses = evaluationResponseRepository
-				.findAllByIncubatorAndTenantId( incubator, tenantId );
-		evaluationResponses.forEach( response -> response.getEvaluation().getQuestions()
-				.forEach( question -> question.getAlternatives()
-						.forEach( alternative -> alternative.setRightAnswer( false ) ) ) );
+		// List<EvaluationResponse> evaluationResponses =
+		// evaluationResponseRepository
+		// .findAllByIncubatorAndTenantId( incubator, tenantId );
+		// evaluationResponses.forEach( response ->
+		// response.getEvaluation().getQuestions()
+		// .forEach( question -> question.getAlternatives()
+		// .forEach( alternative -> alternative.setRightAnswer( false ) ) ) );
 		return evaluationResponseRepository.findAllByIncubatorAndTenantId( incubator, tenantId );
 	}
 
